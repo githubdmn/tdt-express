@@ -8,7 +8,7 @@ TODO: https://www.makeareadme.com/
 1) npx tsc --init
 2) mkdir ./src
 3) touch ./src/app.ts
-4) npm install --save-dev ts-node-dev typescript
+4) npm install --save-dev typescript nodemon crypto eslint ts-node-dev 
 5) package.json :
 			"scripts": {
 				"dev": "ts-node-dev --respawn --transpile-only ./src/app.ts"
