@@ -5,8 +5,8 @@
   "main": "app.js",
    "scripts": {
      "dev": "npx ts-node-dev --respawn --transpile-only ./src/app.ts",
-     "lint": "npx eslint src/*.ts",
-     "lint-fix": "npx eslint src/*.ts --fix"
+     "lint": "npx eslint ./src/*.ts",
+     "lint-fix": "npx eslint ./src/*.ts --fix"
    },
 
   "repository": {
