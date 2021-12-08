@@ -15,5 +15,4 @@ express()
 	.use(express.urlencoded({ extended: true }))
 	.get('/', (req: Request, res:Response) => { res.status(200).send(indexHeader.concat(indexMessage)) })
 	.get('/health', (req: Request, res:Response) => { res.status(200).send('OK') })
-	.listen(() => console.log(`Listening on port ${dev().port}...`));
-
+	.listen(dev().port, () => { console.log(`${new Date()}\nListening on port ${dev().port} ...`); });
