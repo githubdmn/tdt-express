@@ -1,4 +1,2 @@
 
-export {dblink, mongo_connect} from './mongo';
-//
-
+export { mongoConnect } from './mongo'
