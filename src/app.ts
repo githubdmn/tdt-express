@@ -2,7 +2,7 @@
 import dev from './config'
 import { mongoConnect } from './database'
 import express, { Request, Response } from 'express'
-import UserMongoose from './models/user.mongoose'
+import { UserMongoose } from './models'
 
 mongoConnect()
   .then(() => {
