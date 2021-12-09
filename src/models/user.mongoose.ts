@@ -9,4 +9,4 @@ const schema = new Schema<UserModel>({
   fullname: { type: String, required: true }
 })
 
-export const UserMongoose = model<UserModel>('User', schema)
+export const UserMongoose = model<UserModel>('test-users', schema)
