@@ -9,6 +9,4 @@ const schema = new Schema<UserModel>({
   fullname: { type: String, required: true }
 })
 
-const UserMongoose = model<UserModel>('User', schema)
-
-export default UserMongoose
+export const UserMongoose = model<UserModel>('User', schema)
