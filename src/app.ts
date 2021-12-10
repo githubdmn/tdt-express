@@ -2,14 +2,12 @@
 import dev from './config'
 import { mongoConnect } from './database'
 import express, { Request, Response } from 'express'
-import { UserMongoose } from './models'
+import { createCollections } from './models'
 
 mongoConnect()
   .then(() => {
     console.log('Successfully connected to DB')
-    UserMongoose.createCollection()
-      .then(() => console.log('Succesfully to created the user collection'))
-      .catch(() => console.log('Failed to create the user collection'))
+    createCollections()
   })
   .catch(() => console.log('Failed to connect the DB'))
 
