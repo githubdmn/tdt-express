@@ -3,6 +3,7 @@ import dev from './config'
 import { mongoConnect } from './database'
 import express, { Request, Response } from 'express'
 import { createCollections } from './models'
+import router from './routes'
 
 mongoConnect()
   .then(() => {
@@ -18,5 +19,5 @@ express()
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
   .get('/', (req: Request, res: Response) => { res.status(200).send(indexHeader.concat(indexMessage)) })
-  .get('/health', (req: Request, res: Response) => { res.status(200).send('OK') })
+  .use(router)
   .listen(dev().port, () => { console.log(`${new Date().toString()}\nListening on port ${dev().port} ...`) })
