@@ -5,15 +5,16 @@ import express, { Request, Response } from 'express'
 import { createCollections } from './models'
 import router from './routes'
 import EnvVar from './config/envVarType'
+import logger from './utils'
 
 const env:EnvVar = environment(process.argv)
 
 mongodb(env)
   .then(() => {
-    console.log('Successfully connected to DB')
+    logger.info('Successfully connected to DB')
     createCollections()
   })
-  .catch(() => console.log('Failed to connect the DB'))
+  .catch(() => logger.error('Failed to connect the DB'))
 
 const indexHeader = '<h3>21-12<h3></break>'
 const indexMessage = `<p>Date posted 08/12/2021<br>Home index - ${new Date().toString()}</p>`
@@ -21,6 +22,6 @@ const indexMessage = `<p>Date posted 08/12/2021<br>Home index - ${new Date().toS
 express()
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
-  .get('/', (req: Request, res: Response) => res.status(200).send(indexHeader.concat(indexMessage)) )
+  .get('/', (req: Request, res: Response) => res.status(200).send(indexHeader.concat(indexMessage)))
   .use(router)
-  .listen(env.port, () => { console.log(`${new Date().toString()}\nListening on port ${env.port} ...`) })
+  .listen(env.port, () => logger.info(`Listening on port ${env.port}...`))
