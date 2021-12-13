@@ -1,13 +1,14 @@
+/* eslint-disable no-unused-vars */
 
 import { connect, disconnect } from 'mongoose'
-import dev from '../config'
 
-const dblink = `mongodb+srv://${dev().mongo_username}:${dev().mongo_password}@${dev().mongo_server}/${dev().mongo_name}`
+export const mongodb = async (env: any) => {
+  const dblink = `mongodb+srv://${env.mongo_username}:${env.mongo_password}@${env.mongo_server}/${env.mongo_name}`
 
-export const mongoConnect = async () => await connect(dblink, {
-  // useCreateIndex: true,
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true
-})
-
-export const mongoDisconnect = async () => await disconnect()
+  await connect(dblink, {
+    // useCreateIndex: true,
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true
+  })
+  // TODO: mongodb disconnect
+}

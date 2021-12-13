@@ -1,2 +1,2 @@
 
-export { mongoConnect } from './mongo'
+export { mongodb } from './mongo'

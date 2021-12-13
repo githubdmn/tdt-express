@@ -1,12 +1,13 @@
 
 import environment from './config'
-import { mongoConnect } from './database'
+import { mongodb } from './database'
 import express, { Request, Response } from 'express'
 import { createCollections } from './models'
 import router from './routes'
 
 const env = environment(process.argv)
-mongoConnect()
+
+mongodb(env)
   .then(() => {
     console.log('Successfully connected to DB')
     createCollections()
