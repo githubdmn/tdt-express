@@ -3,11 +3,15 @@ import { resolve } from 'path'
 import { env } from 'process'
 import { config } from 'dotenv'
 
-config({
-  path: resolve(__dirname, '../../.env')
-})
+const environment = (envFlag: String[]) => {
+  console.log(envFlag)
+  /* eslint-env node, mocha */
+  // const envVar = process.argv[2] ? '.env.test' : '.env'
+  const envVar = '.env'
+  config({
+    path: resolve(__dirname, `../../${envVar}`)
+  })
 
-const dev = () => {
   return {
     port: env.PORT,
     salt: env.SALT_WORK_FACTOR,
@@ -20,4 +24,4 @@ const dev = () => {
   }
 }
 
-export default dev
+export default environment

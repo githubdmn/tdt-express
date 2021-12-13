@@ -1,10 +1,11 @@
 
-import dev from './config'
+import environment from './config'
 import { mongoConnect } from './database'
 import express, { Request, Response } from 'express'
 import { createCollections } from './models'
 import router from './routes'
 
+const env = environment(process.argv)
 mongoConnect()
   .then(() => {
     console.log('Successfully connected to DB')
@@ -20,4 +21,4 @@ express()
   .use(express.urlencoded({ extended: true }))
   .get('/', (req: Request, res: Response) => { res.status(200).send(indexHeader.concat(indexMessage)) })
   .use(router)
-  .listen(dev().port, () => { console.log(`${new Date().toString()}\nListening on port ${dev().port} ...`) })
+  .listen(env.port, () => { console.log(`${new Date().toString()}\nListening on port ${env.port} ...`) })
