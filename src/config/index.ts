@@ -2,8 +2,9 @@
 import { resolve } from 'path'
 import { env } from 'process'
 import { config } from 'dotenv'
+import EnvVar from './envVarType'
 
-const environment = (envFlag: String[]) => {
+const environment = (envFlag: String[]): EnvVar => {
   console.log(envFlag)
   /* eslint-env node, mocha */
   // const envVar = process.argv[2] ? '.env.test' : '.env'

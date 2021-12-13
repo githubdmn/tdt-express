@@ -4,8 +4,9 @@ import { mongodb } from './database'
 import express, { Request, Response } from 'express'
 import { createCollections } from './models'
 import router from './routes'
+import EnvVar from './config/envVarType'
 
-const env = environment(process.argv)
+const env:EnvVar = environment(process.argv)
 
 mongodb(env)
   .then(() => {
@@ -20,6 +21,6 @@ const indexMessage = `<p>Date posted 08/12/2021<br>Home index - ${new Date().toS
 express()
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
-  .get('/', (req: Request, res: Response) => { res.status(200).send(indexHeader.concat(indexMessage)) })
+  .get('/', (req: Request, res: Response) => res.status(200).send(indexHeader.concat(indexMessage)) )
   .use(router)
   .listen(env.port, () => { console.log(`${new Date().toString()}\nListening on port ${env.port} ...`) })
