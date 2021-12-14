@@ -2,17 +2,17 @@
 import environment from './config'
 import { mongodb } from './database'
 import express, { Request, Response } from 'express'
-import { createCollections } from './models'
+import models from './models'
 import router from './routes'
 import EnvVar from './config/envVarType'
-import logger from './utils'
+import { logger } from './utils'
 
 const env:EnvVar = environment(process.argv)
 
 mongodb(env)
   .then(() => {
     logger.info('Successfully connected to DB')
-    createCollections()
+    models.createCollections()
   })
   .catch(() => logger.error('Failed to connect the DB'))
 
