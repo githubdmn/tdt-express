@@ -1,15 +1,15 @@
 import { Router, Request, Response } from 'express'
-import service from '../services'
+import { getUser, registerUser } from '../services'
 
 export default Router()
   .get('/:id', (req: Request, res: Response) => {
-    console.log(service.getUser())
+    console.log(getUser())
     res.status(200).send(`Get user with id ${req.params.id}`)
   })
   .post('/', (req: Request, res: Response) => {
     // check req.body form - middleware
     // register service (with confirmation)
-    console.log(service.registerUser())
+    console.log(registerUser())
     res.status(200).send(req.body)
   })
   .put('/:id', (req: Request, res: Response) => {

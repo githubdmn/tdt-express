@@ -1,6 +1,6 @@
-import UserService from './user'
+import { registerUser, getUser } from './user'
 
-export default {
-  registerUser: UserService.registerUser,
-  getUser: UserService.getUser
+export = {
+  registerUser,
+  getUser
 }
