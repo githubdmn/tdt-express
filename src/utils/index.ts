@@ -1,4 +1,4 @@
 import { sample } from 'lodash'
 import logger from './logger'
 
-export = { logger, sample }
+export default { logger, sample }
