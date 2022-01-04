@@ -1,8 +1,8 @@
 
 // import model from '../../models'
 
-const registerUser = (): string => {
+const register = (): string => {
   return 'REGISTER USER SERVICE'
 }
 
-export default registerUser
+export default register

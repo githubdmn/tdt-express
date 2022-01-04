@@ -1,4 +1,3 @@
-// TODO
 
 import { object } from 'joi'
 

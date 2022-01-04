@@ -1,6 +1,6 @@
 
-const getUser = (): string => {
+const get = (): string => {
   return 'GET USER SERVICE'
 }
 
-export default getUser
+export default get

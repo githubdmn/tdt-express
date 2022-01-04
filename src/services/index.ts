@@ -1,6 +1,6 @@
-import { registerUser, getUser } from './user'
+import user from './user'
 
-export = {
-  registerUser,
-  getUser
+export default {
+  userRegister: user.register,
+  userGet: user.get
 }
