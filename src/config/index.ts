@@ -5,7 +5,7 @@ import { config } from 'dotenv'
 import EnvVar from './envVarType'
 
 const environment = (envFlag: String[]): EnvVar => {
-  console.log(envFlag)
+  console.log(envFlag) // TODO: remove this line
   /* eslint-env node, mocha */
   // const envVar = process.argv[2] ? '.env.test' : '.env'
   const envVar = '.env'
