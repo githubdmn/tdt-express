@@ -11,7 +11,7 @@ const registerObject = Joi.object({
 
 const registerValidation = (req: Request, res: Response, next: NextFunction) => {
   const valid = registerObject.validate(req.body)
-  if (valid.error) return res.sendStatus(400).send(valid.value)
+  if (valid.error) return valid.value
   else next
 }
 

@@ -7,10 +7,10 @@ export default Router()
     console.log(service.userGet())
     res.status(200).send(`Get user with id ${req.params.id}`)
   })
-  .post('/', (req: Request, res: Response, next: NextFunction) => {
+  .post('/', async (req: Request, res: Response, next: NextFunction) => {
     middleware.registerValidation(req, res, next)
     try {
-      const register = service.userRegister(req.body)
+      const register = await service.userRegister(req.body)
       res.status(200).json(register)
     } catch (error) {
       res.status(200).json(error)

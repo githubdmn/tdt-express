@@ -5,6 +5,6 @@ export default interface UserModel {
  email: string;
  password: string;
  fullname: string;
-// createdAt: Date;
-// updatedAt: Date;
+ createdAt: Date;
+ updatedAt: Date;
 }
