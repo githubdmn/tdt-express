@@ -35,17 +35,59 @@
 				},
 				{
 					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// https://gist.github.com/madebysid/b57985b0649d3407a7aa9de1bd327990",
+									"console.log(pm.environment.get('local-user-register'))",
+									"const localSendRequest = (user) => {",
+									"    const local_request = {",
+									"        method: 'POST',",
+									"        url: `${pm.environment.get('local-user-register')}`,",
+									"        header: 'Content-Type: application/json',",
+									"        body: JSON.stringify(user)",
+									"    }",
+									"",
+									"    pm.sendRequest(local_request,",
+									"        function (err, response) {",
+									"            console.log(response.json());",
+									"        });",
+									"}",
+									"",
+									"const dynamicUser = (n) => ({",
+									"    email: `testing.mail+${n}@mail.com`,",
+									"    password: '123qew',",
+									"    fullname: `testing.name+${n}`",
+									"});",
+									"",
+									"for (let i = 0, length = 44; i <= length; i += 1) {",
+									"    setTimeout(() => {",
+									"        localSendRequest(dynamicUser(Math.floor(Math.random() * 5)));",
+									"    }, 5000);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"zxc@asd.com\",\n    \"password\": \"123\",\n    \"fullname\": \"Adam Smith\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:8000/user",
+							"raw": "{{local-user-register}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"user"
+								"{{local-user-register}}"
 							]
 						}
 					},
