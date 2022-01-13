@@ -1,16 +1,20 @@
-import { Router, Request, Response } from 'express'
+import { Router, Request, Response, NextFunction } from 'express'
 import service from '../services'
+import middleware from '../middleware'
 
 export default Router()
   .get('/:id', (req: Request, res: Response) => {
     console.log(service.userGet())
     res.status(200).send(`Get user with id ${req.params.id}`)
   })
-  .post('/', (req: Request, res: Response) => {
-    // check req.body form - middleware
-    // register service (with confirmation)
-    console.log(service.userRegister)
-    res.status(200).send(req.body)
+  .post('/', (req: Request, res: Response, next: NextFunction) => {
+    middleware.registerValidation(req, res, next)
+    try {
+      const register = service.userRegister(req.body)
+      res.status(200).json(register)
+    } catch (error) {
+      res.status(200).json(error)
+    }
   })
   .put('/:id', (req: Request, res: Response) => {
     console.log('user - update put')

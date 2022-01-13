@@ -1,8 +1,18 @@
+/* eslint-disable no-unused-expressions */
 
-import { object, string } from 'joi'
+import { Request, Response, NextFunction } from 'express'
+import Joi from 'joi'
 
-export default object({
-  email: string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-  password: string().required(),
-  fullname: string().required()
+const registerObject = Joi.object({
+  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+  password: Joi.string().required(),
+  fullname: Joi.string().required()
 })
+
+const registerValidation = (req: Request, res: Response, next: NextFunction) => {
+  const valid = registerObject.validate(req.body)
+  if (valid.error) return res.sendStatus(400).send(valid.value)
+  else next
+}
+
+export default registerValidation

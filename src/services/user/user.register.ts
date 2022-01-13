@@ -1,8 +1,10 @@
 
 // import model from '../../models'
 
-const register = (): string => {
-  return 'REGISTER USER SERVICE'
+const register = (input: any): string => {
+  console.log(input)
+
+  return 'User successfully registered'
 }
 
 export default register
