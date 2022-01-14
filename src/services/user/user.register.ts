@@ -11,6 +11,13 @@ const register = async (input: any): Promise<string> => {
     input.createdAt = new Date().toString()
     input.updatedAt = new Date().toString()
     await models.UserMongoose.create(input)
+    await models.LoginMongoose.create({
+      id: input.id,
+      email: input.email,
+      password: input.password,
+      lastLogin: new Date().toString(),
+      lastLogout: new Date().toString()
+    })
     return 'User successfully registered'
   } else {
     return `User exists with email: ${input.email}`
