@@ -4,16 +4,17 @@ import middleware from '../middleware'
 
 export default Router()
   .get('/:id', (req: Request, res: Response) => {
-    console.log(service.userGet())
+    console.log(service.userGet('TODO: change'))
     res.status(200).send(`Get user with id ${req.params.id}`)
   })
   .post('/', async (req: Request, res: Response, next: NextFunction) => {
-    middleware.registerValidation(req, res, next)
+    const message: any = middleware.registerValidation(req)
     try {
+      if (message) throw message
       const register = await service.userRegister(req.body)
-      res.status(200).json(register)
+      return res.status(200).json(register)
     } catch (error) {
-      res.status(200).json(error)
+      return res.status(200).json(error)
     }
   })
   .put('/:id', (req: Request, res: Response) => {
