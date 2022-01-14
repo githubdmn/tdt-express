@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 
-import { Request, Response, NextFunction } from 'express'
+import { Request } from 'express'
 import Joi from 'joi'
 
 const registerObject = Joi.object({
@@ -9,10 +9,10 @@ const registerObject = Joi.object({
   fullname: Joi.string().required()
 })
 
-const registerValidation = (req: Request, res: Response, next: NextFunction) => {
+const registerValidation = (req: Request): string | null => {
   const valid = registerObject.validate(req.body)
-  if (valid.error) return valid.value
-  else next
+  if (Joi.isError(valid.error)) return valid.error.details[0].message
+  else return null
 }
 
 export default registerValidation
