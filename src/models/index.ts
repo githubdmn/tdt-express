@@ -1,4 +1,5 @@
 import { UserMongoose } from './user.mongoose'
+import { LoginMongoose } from './login.mongoose'
 import utils from '../utils'
 
 export default {
@@ -7,5 +8,6 @@ export default {
       .then(() => utils.logger.info('Succesfully to created the user collection'))
       .catch(() => utils.logger.error('Failed to create the user collection'))
   },
-  UserMongoose
+  UserMongoose,
+  LoginMongoose
 }
