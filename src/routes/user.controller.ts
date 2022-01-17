@@ -8,14 +8,13 @@ export default Router()
     res.status(200).send(`Get user with id ${req.params.id}`)
   })
   .post('/', async (req: Request, res: Response, next: NextFunction) => {
-    const message: any = middleware.registerValidation(req)
-    try {
-      if (message) throw message
-      const register = await service.userRegister(req.body)
-      return res.status(200).json(register)
-    } catch (error) {
-      return res.status(200).json(error)
-    }
+    const valid: any = middleware.registerValidation(req)
+    if (valid.error) return res.status(200).json(valid.message)
+    const register = await service.userRegister({
+      ...req.body,
+      userAgent: req.get('User-Agent')
+    })
+    return res.status(200).json(register)
   })
   .put('/:id', (req: Request, res: Response) => {
     console.log('user - update put')
