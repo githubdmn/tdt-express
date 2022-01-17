@@ -9,10 +9,13 @@ const registerObject = Joi.object({
   fullname: Joi.string().required()
 })
 
-const registerValidation = (req: Request): string | null => {
-  const valid = registerObject.validate(req.body)
-  if (Joi.isError(valid.error)) return valid.error.details[0].message
-  else return null
+const registerValidation = (req: Request): Object => {
+  const valid: any = registerObject.validate(req.body)
+  const isError = Joi.isError(valid.error)
+  return {
+    error: isError,
+    message: isError ? valid.error.details[0].message : 'Data is valid'
+  }
 }
 
 export default registerValidation
