@@ -6,4 +6,5 @@ export default interface LoginModel {
  password: string;
  lastLogin: Date;
  lastLogout: Date;
+ userAgent: string;
 }
