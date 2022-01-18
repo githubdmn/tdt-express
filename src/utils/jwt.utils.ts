@@ -1,16 +1,36 @@
 
-import { verify, sign, JsonWebTokenError, TokenExpiredError, SignOptions, JwtPayload } from 'jsonwebtoken'
+import { verify, sign, SignOptions, JwtPayload } from 'jsonwebtoken'
 import environment from '../config'
+import models from '../models'
 
-const privateKey: any = environment().privateKey
+const accessSecret: any = environment().accessSecret
 
-const publicKey: any = environment().privateKey
+const refreshSecret: any = environment().refreshSecret
 
-const signUser = (payload: Object, options?: SignOptions): string => (sign(payload, privateKey, {
+const generateAccessToken = (payload: Object, options?: SignOptions): string => (sign(payload, accessSecret, {
   ...(options && options),
   algorithm: 'HS256'
 }))
 
-const verifyUser = (token: string): string | JwtPayload => (verify(token, publicKey))
+const generateRefreshToken = (payload: Object, options?: SignOptions): string => (sign(payload, refreshSecret, {
+  ...(options && options),
+  algorithm: 'HS256'
+}))
 
-export default { signUser, verifyUser, JsonWebTokenError, TokenExpiredError }
+const verifyAccessToken = (token: string): string | JwtPayload => (verify(token, accessSecret))
+const verifyRefreshToken = (token: string): string | JwtPayload => (verify(token, refreshSecret))
+
+const reissueToken = async (refreshToken: string): Promise<any> => {
+  try {
+    const user = verifyRefreshToken(refreshToken)
+    const exists: any = await models.LoginMongoose.findOne({ email: user.email })
+    return generateAccessToken({
+      username: exists._doc.email,
+      password: exists._doc.password
+    }, { expiresIn: '20s' })
+  } catch (error) {
+    return error
+  }
+}
+
+export default { generateAccessToken, generateRefreshToken, verifyAccessToken, verifyRefreshToken, reissueToken }

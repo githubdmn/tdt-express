@@ -15,8 +15,8 @@ const environment = (): EnvVar => {
 
   return {
     port: env.PORT,
-    publicKey: env.PUBLIC_KEY,
-    privateKey: env.PRIVATE_KEY,
+    accessSecret: env.ACCESS_SECRET,
+    refreshSecret: env.REFRESH_SECRET,
     mongo_username: env.MONGO_USERNAME,
     mongo_password: env.MONGO_PASSWORD,
     mongo_server: env.MONGO_SERVER,

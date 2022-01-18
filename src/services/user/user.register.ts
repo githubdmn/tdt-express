@@ -2,6 +2,7 @@
 import models from '../../models/'
 import { customAlphabet } from 'nanoid'
 import { hashPassword } from './hash.password'
+import utils from '../../utils'
 
 const register = async (input: any): Promise<string> => {
   const exists = await models.UserMongoose.findOne({ email: input.email })
@@ -17,7 +18,11 @@ const register = async (input: any): Promise<string> => {
       password: input.password,
       lastLogin: new Date().toString(),
       lastLogout: new Date().toString(),
-      userAgent: input.userAgent
+      userAgent: input.userAgent,
+      refreshToken: utils.generateRefreshToken({
+        email: input.email,
+        password: input.password
+      })
     })
     if (register.id && login.id) return 'User successfully registered'
     else return 'An error occured while saving to the database'

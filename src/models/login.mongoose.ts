@@ -8,7 +8,8 @@ const schema = new Schema<LoginModel>({
   password: { type: String, required: true },
   lastLogin: { type: Date },
   lastLogout: { type: Date },
-  userAgent: { type: String }
+  userAgent: { type: String },
+  refreshToken: { type: String }
 })
 
 export const LoginMongoose = model<LoginModel>('test-login', schema)

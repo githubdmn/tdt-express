@@ -2,6 +2,9 @@ import { Router, Request, Response } from 'express'
 import service from '../services'
 
 export default Router()
+  .get('/check', (req: Request, res: Response) => {
+    return res.status(200).send('check works')
+  })
   .get('/:id', (req: Request, res: Response) => {
     console.log(service.userGet('TODO: change'))
     res.status(200).send(`Get user with id ${req.params.id}`)
