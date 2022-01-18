@@ -1,18 +1,10 @@
 import { Router, Request, Response } from 'express'
 import service from '../services'
-import middleware from '../middleware'
 
 export default Router()
   .get('/:id', (req: Request, res: Response) => {
     console.log(service.userGet('TODO: change'))
     res.status(200).send(`Get user with id ${req.params.id}`)
-  })
-  .post('/', middleware.registerValidation, async (req: Request, res: Response) => {
-    const register = await service.userRegister({
-      ...req.body,
-      userAgent: req.get('User-Agent')
-    })
-    return res.status(200).json(register)
   })
   .put('/:id', (req: Request, res: Response) => {
     console.log('user - update put')
