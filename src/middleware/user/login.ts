@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 
-import { Request } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import Joi from 'joi'
 
 const loginObject = Joi.object({
@@ -8,13 +8,9 @@ const loginObject = Joi.object({
   password: Joi.string().required()
 })
 
-const loginValidation = (req: Request): Object => {
+const loginValidation = (req: Request, res: Response, next: NextFunction): any => {
   const valid: any = loginObject.validate(req.body)
-  const isError = Joi.isError(valid.error)
-  return {
-    error: isError,
-    message: isError ? valid.error.details[0].message : 'Data is valid'
-  }
+  return Joi.isError(valid.error) ? res.status(400).send(valid.error.details[0].message) : next()
 }
 
 export default loginValidation

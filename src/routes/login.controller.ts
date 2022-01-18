@@ -1,12 +1,10 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import { Router, Request, Response } from 'express'
 import services from '../services'
 import middleware from '../middleware'
 import utils from '../utils'
 
 export default Router()
-  .post('/', async (req: Request, res: Response, next: NextFunction) => {
-    const valid: any = middleware.loginValidation(req)
-    if (valid.error) return res.status(200).json(valid.message)
+  .post('/', middleware.loginValidation, async (req: Request, res: Response) => {
     const login: Promise<any> | any = await services.userLogin({ ...req.body, userAgent: req.get('User-Agent') })
     if (login.error) return res.status(200).json(login.message)
     else {

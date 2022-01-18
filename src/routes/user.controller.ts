@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import { Router, Request, Response } from 'express'
 import service from '../services'
 import middleware from '../middleware'
 
@@ -7,9 +7,7 @@ export default Router()
     console.log(service.userGet('TODO: change'))
     res.status(200).send(`Get user with id ${req.params.id}`)
   })
-  .post('/', async (req: Request, res: Response, next: NextFunction) => {
-    const valid: any = middleware.registerValidation(req)
-    if (valid.error) return res.status(200).json(valid.message)
+  .post('/', middleware.registerValidation, async (req: Request, res: Response) => {
     const register = await service.userRegister({
       ...req.body,
       userAgent: req.get('User-Agent')
