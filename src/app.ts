@@ -7,7 +7,7 @@ import router from './routes'
 import EnvVar from './config/envVarType'
 import utils from './utils'
 
-const env:EnvVar = environment(process.argv)
+const env:EnvVar = environment()
 
 mongodb(env)
   .then(() => {

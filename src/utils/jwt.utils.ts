@@ -1,9 +1,10 @@
 
 import { verify, sign, JsonWebTokenError, TokenExpiredError, SignOptions, JwtPayload } from 'jsonwebtoken'
+import environment from '../config'
 
-const privateKey: string = 'FRGNFEkT51oWzp4PS9qTWN0ZdqxdIConElLNlkAXc1HvzzGsDnN'
+const privateKey: any = environment().privateKey
 
-const publicKey: string = 'xltTDhHDNf6RxdAsQJ5EPzB0ag6JUxzqRCOcQKBgQDQz782Q10mH5v6T'
+const publicKey: any = environment().privateKey
 
 const signUser = (payload: Object, options?: SignOptions): string => (sign(payload, privateKey, {
   ...(options && options),
