@@ -1,13 +1,13 @@
 import { Router, Request, Response } from 'express'
-import userController from './user.handler'
-import loginController from './login.handler'
-import registerController from './register.handler'
+import userHandler from './user.handler'
+import loginHandler from './login.handler'
+import registerHandler from './register.handler'
 
 export default Router()
   .get('/health', (req: Request, res: Response) => {
     res.status(200).send('OK')
   })
-  .use('/register', registerController)
-  .use('/login', loginController)
+  .use('/register', registerHandler)
+  .use('/login', loginHandler)
   // TODO: auth middleware
-  .use('/user', userController)
+  .use('/user', userHandler)
