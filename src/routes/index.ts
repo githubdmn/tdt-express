@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express'
-import userController from './user.controller'
-import loginController from './login.controller'
-import registerController from './register.controller'
+import userController from './user.handler'
+import loginController from './login.handler'
+import registerController from './register.handler'
 
 export default Router()
   .get('/health', (req: Request, res: Response) => {
